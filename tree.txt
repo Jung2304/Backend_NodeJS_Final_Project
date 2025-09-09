@@ -1,0 +1,22 @@
+//ANCHOR - First file tree (9/9/2025)
+
+product-management-final/
+├─ routes/
+│  └─ client/
+│     ├─ home.route.js
+│     ├─ index.route.js
+│     └─ products.route.js
+├─ views/
+│  └─ client/
+│     └─ pages/
+│        ├─ home/
+│        │  └─ index.pug
+│        └─ products/
+│           └─ index.pug
+├─ .gitignore
+├─ index.js
+├─ package-lock.json
+├─ package.json
+├─ README.md
+└─ tree.txt
+
