@@ -1,11 +1,13 @@
 const express = require("express");
-const mongoose = require('mongoose');
 require("dotenv").config();     // cài package dotenv và require như này để dùng các hằng trong file .env
 
-const routes = require("./routes/client/index.route.js");     // main route file
+const database = require("./config/database.js");     // ./ start from current dir
+database.connect();
 
-const port = process.env.PORT;      // cách lấy hằng số bên file .env
-const app = express();
+const port = process.env.PORT;      // lấy cổng port bên file .env
+const app = express(); 
+
+const routes = require("./routes/client/index.route.js");     // main route file
 
 app.use(express.static("public"));      // /public -> / -> các file tĩnh đều available từ root /
 
