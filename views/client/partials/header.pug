@@ -1,1 +1,18 @@
-header Header
+//- Layout: Bootstrap grid splits header into 25% logo + 75% menu
+//- .col-3 and .col-9 are bootstrap grid classes (divides the row into 12 equal columns)
+
+header.header 
+  .container 
+    .row.align-items-center   
+      .col-3 
+        .inner-logo     
+          a(href="/") 
+            img(src="/images/logo.svg", alt="Logo")
+      
+      .col-9 
+        .inner-menu 
+          ul 
+            li
+              a(href="/") Trang chủ
+            li
+              a(href="/products") Sản phẩm
