@@ -20,3 +20,48 @@ product-management-final/
 ├─ README.md
 └─ tree.txt
 
+//ANCHOR - Second file tree (10/9/2025)
+
+product-management-final/
+├─ config/
+│  └─ database.js
+├─ controllers/
+│  └─ client/
+│     ├─ home.controller.js
+│     └─ products.controller.js
+├─ models/
+│  └─ product.model.js
+├─ public/
+│  ├─ css/
+│  │  └─ style.css
+│  ├─ images/
+│  │  └─ logo.svg
+│  └─ js/
+│     └─ script.js
+├─ routes/
+│  └─ client/
+│     ├─ home.route.js
+│     ├─ index.route.js
+│     └─ products.route.js
+├─ views/
+│  └─ client/
+│     ├─ layouts/
+│     │  └─ default.pug
+│     ├─ mixins/
+│     │  └─ box-head.pug
+│     ├─ pages/
+│     │  ├─ home/
+│     │  │  └─ index.pug
+│     │  └─ products/
+│     │     └─ index.pug
+│     └─ partials/
+│        ├─ footer.pug
+│        └─ header.pug
+├─ .env
+├─ .gitignore
+├─ index.js
+├─ package-lock.json
+├─ package.json
+├─ README.md
+└─ tree.txt
+
