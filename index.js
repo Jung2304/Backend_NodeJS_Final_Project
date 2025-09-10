@@ -1,9 +1,10 @@
 const express = require("express");
 const mongoose = require('mongoose');
+require("dotenv").config();     // cài package dotenv và require như này để dùng các hằng trong file .env
 
 const routes = require("./routes/client/index.route.js");     // main route file
 
-const port = 3000;
+const port = process.env.PORT;      // cách lấy hằng số bên file .env
 const app = express();
 
 app.set("views", "./views");
