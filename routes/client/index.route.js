@@ -1,5 +1,5 @@
-const productRoutes = require("./products.route.js");
 const homeRoutes = require("./home.route.js");
+const productRoutes = require("./products.route.js");
 
 module.exports = (app) => {         // export route và tham số app ỏ file main
 
