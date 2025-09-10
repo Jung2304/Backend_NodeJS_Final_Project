@@ -7,6 +7,8 @@ const routes = require("./routes/client/index.route.js");     // main route file
 const port = process.env.PORT;      // cách lấy hằng số bên file .env
 const app = express();
 
+app.use(express.static("public"));      // /public -> / -> các file tĩnh đều available từ root /
+
 app.set("views", "./views");
 app.set("view engine", "pug");
 
