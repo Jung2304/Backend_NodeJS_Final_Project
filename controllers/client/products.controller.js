@@ -8,7 +8,6 @@ module.exports.index = async (req, res) => {        // index là trang chính c�
     deleted: false
   });        
 
-
 // tính toán giá mới sau giảm giá
   const newProducts = products.map((item) => {
     item.newPrice = (item.price * (100 - item.discountPercentage) / 100).toFixed(2);    // để làm tròn 2 số sau dấu phẩy
