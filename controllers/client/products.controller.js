@@ -1,5 +1,6 @@
 const Product = require("../../models/product.model.js");
 
+// [GET] /products
 module.exports.index = async (req, res) => {        // index là trang chính của controller products
 // hàm find, truyền vào object -> object là các bản ghi có key status: active và deleted: false 
   const products = await Product.find({            
