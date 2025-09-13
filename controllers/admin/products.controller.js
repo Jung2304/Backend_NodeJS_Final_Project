@@ -1,37 +1,15 @@
-// MODEL
 const Product = require("../../models/product.model.js");
+const filterStatusHelper = require("../../helpers/filterStatus.js");
 
-// [GET] /admin/products
+//< [GET] /admin/products
 module.exports.index = async (req, res) => {
-  let filterStatus = [
-    {
-      name: "Tất cả",
-      status: "",
-      class: "active"         // để bôi xanh nút bấm
-    },
-    {
-      name: "Hoạt động",
-      status: "active",
-      class: ""
-    },
-    {
-      name: "Dừng hoạt động",
-      status: "inactive",
-      class: ""
-    }
-  ];
-
+  //< Biến find để tìm kiếm theo điều kiện
   let find = {
     deleted: false 
   };
 
-  //! Nếu có yêu cầu truy vấn status thì ta mới truyền vào + nút bấm chuyển
-  if (req.query.status) {
-    filterStatus.forEach(item => {
-      item.class = (item.status == req.query.status) ? "active" : "";   
-    })
-    find.status = req.query.status;         // gán cho object find một key status
-  } 
+  //! Bộ lọc trạng thái
+  const filterStatus = filterStatusHelper(find, req.query);
 
   //! Nếu có yêu cầu tìm kiếm sản phẩm
   let keyword = "";
@@ -51,6 +29,6 @@ module.exports.index = async (req, res) => {
     pageTitle: "Danh sách sản phẩm",
     products: products,
     filterStatus: filterStatus,
-    keyword: keyword              // giữ từ tìm kiế m ở ô input
+    keyword: keyword              // giữ từ tìm kiếm ở ô input
   });
 }
