@@ -1,5 +1,6 @@
 const Product = require("../../models/product.model.js");
 const filterStatusHelper = require("../../helpers/filterStatus.js");
+const searchHelper = require("../../helpers/search.js");
 
 //< [GET] /admin/products
 module.exports.index = async (req, res) => {
@@ -11,14 +12,11 @@ module.exports.index = async (req, res) => {
   //! Bộ lọc trạng thái
   const filterStatus = filterStatusHelper(find, req.query);
 
-  //! Nếu có yêu cầu tìm kiếm sản phẩm
-  let keyword = "";
+  //! Tìm kiếm
+  const objectSearch = searchHelper(req.query);
 
-  if (req.query.keyword) {
-    keyword = req.query.keyword;
-
-    const regex = new RegExp(keyword, "i");       // regex để tìm kiếm keyword + không phân biệt
-    find.title = regex;                 // gán cho object find một key title
+  if (objectSearch.regex) {     
+    find.title = objectSearch.regex;          
   }
 
   //! Phần dùng model + các logic để trích xuất dữ liệu
@@ -29,6 +27,6 @@ module.exports.index = async (req, res) => {
     pageTitle: "Danh sách sản phẩm",
     products: products,
     filterStatus: filterStatus,
-    keyword: keyword              // giữ từ tìm kiếm ở ô input
+    keyword: objectSearch.keyword              // giữ từ tìm kiếm ở ô input
   });
 }
