@@ -1,6 +1,9 @@
 const Product = require("../../models/product.model.js");
+
+//! Helpers
 const filterStatusHelper = require("../../helpers/filterStatus.js");
 const searchHelper = require("../../helpers/search.js");
+const paginationHelper = require("../../helpers/pagination.js");
 
 //< [GET] /admin/products
 module.exports.index = async (req, res) => {
@@ -20,21 +23,8 @@ module.exports.index = async (req, res) => {
   }
 
   //! Phân trang (Pagination)
-  let objectPagination = {
-    currentPage: 1,
-    limitItems: 4,
-    skip: 0,
-    pages: 0
-  };
-
-  if (req.query.page) {
-    objectPagination.currentPage = parseInt(req.query.page);      
-  }
-
-  objectPagination.skip = (objectPagination.currentPage - 1) * objectPagination.limitItems;
-
   const totalProducts = await Product.countDocuments({deleted: false});       // đếm tổng số sản phẩm chưa bị xóa
-  objectPagination.pages = Math.ceil(totalProducts / objectPagination.limitItems);
+  const objectPagination = paginationHelper(req.query, totalProducts);
   
   //! Phần dùng model + các logic để trích xuất dữ liệu
   const products = await Product.find(find).limit(objectPagination.limitItems).skip(objectPagination.skip);           
