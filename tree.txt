@@ -201,3 +201,82 @@ product-management-final/
 ├─ package.json
 ├─ README.md
 └─ tree.txt
+
+//ANCHOR - Fifth file tree (14/9/2025)
+
+product-management-final/
+├─ config/
+│  ├─ database.js
+│  └─ system.js
+├─ controllers/
+│  ├─ admin/
+│  │  ├─ dashboard.controller.js
+│  │  └─ products.controller.js
+│  └─ client/
+│     ├─ home.controller.js
+│     └─ products.controller.js
+├─ helpers/
+│  ├─ filterStatus.js
+│  ├─ pagination.js
+│  └─ search.js
+├─ models/
+│  └─ product.model.js
+├─ public/
+│  ├─ admin/
+│  │  ├─ css/
+│  │  │  └─ style.css
+│  │  ├─ images/
+│  │  └─ js/
+│  │     └─ script.js
+│  └─ client/
+│     ├─ css/
+│     │  └─ style.css
+│     ├─ images/
+│     │  └─ logo.svg
+│     └─ js/
+│        └─ script.js
+├─ routes/
+│  ├─ admin/
+│  │  ├─ dashboard.route.js
+│  │  ├─ index.route.js
+│  │  └─ products.route.js
+│  └─ client/
+│     ├─ home.route.js
+│     ├─ index.route.js
+│     └─ products.route.js
+├─ views/
+│  ├─ admin/
+│  │  ├─ layouts/
+│  │  │  └─ default.pug
+│  │  ├─ mixins/
+│  │  │  ├─ filter-status.pug
+│  │  │  ├─ pagination.pug
+│  │  │  └─ search.pug
+│  │  ├─ pages/
+│  │  │  ├─ dashboard/
+│  │  │  │  └─ index.pug
+│  │  │  └─ products/
+│  │  │     └─ index.pug
+│  │  └─ partials/
+│  │     ├─ header.pug
+│  │     └─ sider.pug
+│  └─ client/
+│     ├─ layouts/
+│     │  └─ default.pug
+│     ├─ mixins/
+│     │  └─ box-head.pug
+│     ├─ pages/
+│     │  ├─ home/
+│     │  │  └─ index.pug
+│     │  └─ products/
+│     │     └─ index.pug
+│     └─ partials/
+│        ├─ footer.pug
+│        └─ header.pug
+├─ .env
+├─ .gitignore
+├─ index.js
+├─ package-lock.json
+├─ package.json
+├─ README.md
+└─ tree.txt
