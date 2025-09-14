@@ -1,4 +1,4 @@
-// Button status
+//! Button status
 const buttonsStatus = document.querySelectorAll("[button-status]");
 
 if(buttonsStatus.length > 0) {         // ktra nếu tồn tại thì mới thêm logic -> tối ưu 
@@ -19,9 +19,10 @@ if(buttonsStatus.length > 0) {         // ktra nếu tồn tại thì mới thê
     });
   });
 }
-// End button status
+//! End button status
 
-// Form search
+
+//! Form search
 const formSearch = document.querySelector("#form-search");
 if (formSearch) {
   let url = new URL(window.location.href);
@@ -31,7 +32,7 @@ if (formSearch) {
     const keyword = event.target.elements.keyword.value;
 
     if (keyword) {
-      url.searchParams.set("keyword", keyword)
+      url.searchParams.set("keyword", keyword);
     }
     else {
       url.searchParams.delete("keyword");     // nếu không tìm kiếm thì xóa đi
@@ -40,5 +41,30 @@ if (formSearch) {
     window.location.href = url.href;
   });
 }
+//! End form search 
 
-// End form search 
+
+//! Pagination
+const buttonsPagination = document.querySelectorAll("[button-pagination]");
+if (buttonsPagination) {
+  let url = new URL(window.location.href);
+
+  buttonsPagination.forEach((button) => {
+    button.addEventListener("click", () => {
+      const page = button.getAttribute("button-pagination");            // bên index.pug đã đ/n attribute này = số trang 
+      
+      if (page) {
+        url.searchParams.set("page", page);
+      } else {
+        url.searchParams.delete("page");
+      }
+
+      window.location.href = url.href; 
+    })
+  });
+}
+
+
+
+
+//! End pagination
