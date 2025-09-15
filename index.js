@@ -1,11 +1,14 @@
 const express = require("express");
-const app = express(); 
 require("dotenv").config();     // cài package dotenv và require như này để dùng các hằng trong file .env
 const systemConfig = require("./config/system.js");     // cài các biến hệ thống thành biến toàn cục
+const methodOverride = require("method-override");
+
+//! APP
+const app = express(); 
+app.use(methodOverride("_method"));
 
 //! lOCAL VARIABLES
 app.locals.prefixAdmin = systemConfig.prefixAdmin;
-
 
 //! DATABASE
 const database = require("./config/database.js");     // ./ start from current dir

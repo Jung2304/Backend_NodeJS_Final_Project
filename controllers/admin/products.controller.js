@@ -38,3 +38,14 @@ module.exports.index = async (req, res) => {
     pagination: objectPagination                // truyền luôn cả object ra ngoài
   });
 }
+
+//< [GET] /admin/products/change-status/:status/:id
+module.exports.changeStatus = async (req, res) => {
+  const status = req.params.status;
+  const id = req.params.id;
+
+  // Chờ update xong mới vẽ ra giao diện
+  await Product.updateOne({ _id: id }, { status: status });
+
+  res.redirect("back");
+}
