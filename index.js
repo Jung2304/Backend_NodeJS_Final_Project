@@ -2,10 +2,12 @@ const express = require("express");
 require("dotenv").config();     // cài package dotenv và require như này để dùng các hằng trong file .env
 const systemConfig = require("./config/system.js");     // cài các biến hệ thống thành biến toàn cục
 const methodOverride = require("method-override");
+const bodyParaser = require("body-parser");
 
 //! APP
 const app = express(); 
-app.use(methodOverride("_method"));
+app.use(methodOverride("_method"));           // to override method like PATCH, DELETE,...
+app.use(bodyParaser.urlencoded({ extended: false }));     // parse application/form-urlencoded
 
 //! lOCAL VARIABLES
 app.locals.prefixAdmin = systemConfig.prefixAdmin;
