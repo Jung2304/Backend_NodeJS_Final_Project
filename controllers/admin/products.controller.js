@@ -58,10 +58,16 @@ module.exports.changeMulti = async (req, res) => {
   //> Sau này sẽ có nhiều type nữa
   switch (type) {
     case "active":
-      await Product.updateMany( { _id: { $in: ids } }, { status: "active" } );
+      await Product.updateMany({ _id: { $in: ids } }, { status: "active" });
       break;
     case "inactive":
-      await Product.updateMany( { _id: { $in: ids } }, {status: "inactive"} );
+      await Product.updateMany({ _id: { $in: ids } }, {status: "inactive"});
+      break;
+    case "delete-all":
+      await Product.updateMany({ _id: { $in: ids } }, {
+        deleted: true,
+        deletedAt: new Date()
+      });
       break;
     default:
       break;
