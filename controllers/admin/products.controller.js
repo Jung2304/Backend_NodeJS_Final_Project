@@ -53,7 +53,7 @@ module.exports.changeStatus = async (req, res) => {
 //< [PATCH] /admin/products/change-multi
 module.exports.changeMulti = async (req, res) => {
   const type = req.body.type;
-  const ids = req.body.ids.split(", ");     // tách thành một mảg
+  const ids = req.body.ids.split(", ");     // tách thành một mảng
 
   //> Sau này sẽ có nhiều type nữa
   switch (type) {
@@ -69,3 +69,13 @@ module.exports.changeMulti = async (req, res) => {
 
   res.redirect("back");
 }  
+
+//< [DELETE] /admin/products/delete/:id
+module.exports.deleteItem = async (req, res) => {
+  const id = req.params.id;
+
+  // Xóa cứng (vĩnh viễn)
+  await Product.deleteOne( { _id: id });
+
+  res.redirect("back");
+}

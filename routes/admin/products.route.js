@@ -12,4 +12,8 @@ router.patch("/change-status/:status/:id", controller.changeStatus);          //
 // Trang thay đổi trạng thái (nhiều sản phẩm)
 router.patch("/change-multi", controller.changeMulti); 
 
+// Trang xóa sản phẩm
+router.delete("/delete/:id", controller.deleteItem);
+
+
 module.exports = router;
