@@ -3,14 +3,18 @@ require("dotenv").config();     // cài package dotenv và require như này đ�
 const systemConfig = require("./config/system.js");     // cài các biến hệ thống thành biến toàn cục
 const methodOverride = require("method-override");
 const bodyParaser = require("body-parser");
+const flash = require("express-flash");
+const cookieParser = require("cookie-parser");
+const session = require("express-session");
 
 //! APP
 const app = express(); 
 app.use(methodOverride("_method"));           // to override method like PATCH, DELETE,...
 app.use(bodyParaser.urlencoded({ extended: false }));     // parse application/form-urlencoded
 
-//! lOCAL VARIABLES
+//! lOCAL VARIABLES và STATIC FILES
 app.locals.prefixAdmin = systemConfig.prefixAdmin;
+app.use(express.static("public"));      // /public -> / -> các file tĩnh đều available từ root /
 
 //! DATABASE
 const database = require("./config/database.js");     // ./ start from current dir
@@ -22,16 +26,24 @@ app.listen(port, () => {
   console.log(`App listening on port ${port}`);
 });
 
+//! EXPRESS-FLASH
+app.use(cookieParser("keyboard cat"));            // secret key to sign session ID cookie 
+app.use(session({ 
+  secret: "keyboard cat",
+  resave: false,
+  saveUninitialized: true,
+  cookie: { maxAge: 60000 } 
+}));
+app.use(flash());
+
 //! MAIN ROUTE
 const routeAdmin = require("./routes/admin/index.route.js");        // dashboard of Admin  
 const routeClient = require("./routes/client/index.route.js");     // main route of Client
 routeAdmin(app);
 routeClient(app);      
 
-//! STATIC FILES va VIEW ENGINE
-app.use(express.static("public"));      // /public -> / -> các file tĩnh đều available từ root /
+//! VIEW ENGINE
 app.set("views", "./views");
 app.set("view engine", "pug");
-
 
 
