@@ -6,7 +6,7 @@ module.exports.index = async (req, res) => {        // index là trang chính c�
   const products = await Product.find({            
     status: "active",
     deleted: false
-  });        
+  }).sort({ position: "desc" });        
 
 // tính toán giá mới sau giảm giá
   const newProducts = products.map((item) => {
