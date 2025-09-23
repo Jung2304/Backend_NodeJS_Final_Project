@@ -1,5 +1,8 @@
 const express = require("express");
+const multer = require("multer");
 const router = express.Router();
+const storageMulter = require("../../helpers/storageMulter.js");
+const upload = multer({ storage: storageMulter() });    
 
 const controller = require("../../controllers/admin/products.controller.js");
 
@@ -19,6 +22,6 @@ router.delete("/delete/:id", controller.deleteItem);
 router.get("/create", controller.create); 
 
 // Trang thêm mới sản phẩm 2 (POST là để gửi data về)
-router.post("/create", controller.createPost);
+router.post("/create", upload.single("thumbnail"), controller.createPost);
 
 module.exports = router;
