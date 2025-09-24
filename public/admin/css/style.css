@@ -1,4 +1,4 @@
-/* Header */
+/*! Header */
 .header {
   background: #202020;
   padding: 10px 0;
@@ -12,9 +12,9 @@
   font-weight: 700;
   color: #fff;
 }
-/* End header */
+/*! End header */
 
-/* Body */
+/*! Body */
 .body .sider {
   width: 150px;
   background: #323232;
@@ -31,9 +31,9 @@
   left: 150px;
   width: calc(100% - 180px);
 }
-/* End body */
+/*! End body */
 
-/* Sider */
+/*! Sider */
 .sider .inner-menu ul {
   list-style: none;
   padding: 0;
@@ -46,9 +46,9 @@
   padding: 6px 10px;
   border-bottom: 1px solid #515151;
 }
-/* End Sider */
+/*! End Sider */
 
-/* Show Alert */
+/*! Show Alert */
 [show-alert] {
   position: fixed;
   top: 70px;
@@ -82,5 +82,20 @@
   border-radius: 50%;
   cursor: pointer;
 }
+/*! End Show Alert */
 
-/* End Show Alert */
+/*! Image Preview */
+.image-preview {
+  width: 150px;
+  height: auto;
+  margin-top: 15px;
+  border: 1px solid #ddd;
+  padding: 15px;
+  border-radius: 5px;
+}
+
+.image-preview[src=""] {
+  display: none;
+}
+/*! End Image Preview */
+

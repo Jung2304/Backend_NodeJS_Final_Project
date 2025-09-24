@@ -179,5 +179,27 @@ if (showAlert) {
     showAlert.classList.add("alert-hidden");   
   });
 }
-
 //! End Show Alert
+
+
+//! Upload image
+const uploadImage = document.querySelector("[upload-image]");
+if (uploadImage) {
+  const uploadImageInput = uploadImage.querySelector("[upload-image-input]");
+  const uploadImagePreview = uploadImage.querySelector("[upload-image-preview]");
+
+  uploadImageInput.addEventListener("change", (event) => {
+    const file = event.target.files[0];       // lấy ra bức ảnh vừa upload
+    if (file) { 
+      uploadImagePreview.src = URL.createObjectURL(file);       // tọa url cho ảnh trên và gắn vào src
+
+      const deleteButton = document.querySelector("#delete-button");
+      deleteButton.addEventListener("click", () => {
+        uploadImageInput.value = "";
+        uploadImagePreview.src = "";
+      });
+    }
+  });
+}
+
+//! End Upload image
