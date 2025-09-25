@@ -65,6 +65,7 @@ block main
                 else 
                   a(href="javascript:;" class="badge badge-danger" data-id=item.id data-status=item.status button-change-status) Dừng hoạt động
               td 
+                a(href=`${prefixAdmin}/products/detail/${item.id}` class="btn btn-info btn-sm") Chi tiết
                 a(href=`${prefixAdmin}/products/edit/${item.id}` class="btn btn-warning btn-sm") Sửa 
                 button(class="btn btn-danger btn-sm ml-1" data-id=item.id button-delete) Xóa
 
