@@ -119,7 +119,6 @@ module.exports.create = async (req, res) => {
 
 //< [POST] /admin/products/create
 module.exports.createPost = async (req, res) => {
-  console.log(req.file);
   req.body.price = parseInt(req.body.price);
   req.body.discountPercentage = parseInt(req.body.discountPercentage);
   req.body.stock = parseInt(req.body.stock);
@@ -132,11 +131,55 @@ module.exports.createPost = async (req, res) => {
     req.body.position = parseInt(req.body.position);
   }
 
-  req.body.thumbnail = `/uploads/${req.file.filename}`;     // thumbnail là ảnh user upload 
-
+  if (req.file) {
+    req.body.thumbnail = `/uploads/${req.file.filename}`;     // thumbnail là ảnh user upload 
+  }
+  
   const product = new Product(req.body);      
   await product.save();
 
   res.redirect(`${systemConfig.prefixAdmin}/products`);
+}
+
+//< [GET] /admin/products/edit/:id
+module.exports.edit = async (req, res) => {
+  try {
+    const find = {
+    deleted: false,               // xóa rồi không cho edit nữa
+    _id: req.params.id
+  };
+
+  const editProduct = await Product.findOne(find);
+
+  res.render("admin/pages/products/edit", {
+    pageTitle: "Chỉnh sửa sản phẩm",
+    product: editProduct
+    });
+  }
+  catch (error) {
+    req.flash("error", "Không tồn tại sản phẩm này!");
+    res.redirect(`${systemConfig.prefixAdmin}/products`);       // nếu không tồn tại thì redirect về trang ds sản phẩm
+  }
+}; 
+
+//< [PATCH] /admin/products/edit/:id
+module.exports.editPatch = async (req, res) => {
+  req.body.price = parseInt(req.body.price);
+  req.body.discountPercentage = parseInt(req.body.discountPercentage);
+  req.body.stock = parseInt(req.body.stock);
+  req.body.position = parseInt(req.body.position);
+
+  if (req.file) {
+    req.body.thumbnail = `/uploads/${req.file.filename}`;     // thumbnail là ảnh user update
+  }
   
+  try {
+    await Product.updateOne({ _id: req.params.id }, req.body);
+    req.flash("success", "Cập nhật thành công!");
+  }
+  catch (error) {
+    req.flash("error", "Cập nhật thất bại!");
+  }
+
+  res.redirect("back"); 
 }
