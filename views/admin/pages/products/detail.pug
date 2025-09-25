@@ -1,6 +1,8 @@
 extends ../../layouts/default.pug
 
 block main  
+  a(href=`${prefixAdmin}/products` class="btn btn-secondary") ← Quay lại
+  
   if (product.title)
     h1(class="mb-4") #{product.title}
   
