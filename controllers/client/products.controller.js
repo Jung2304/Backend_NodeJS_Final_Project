@@ -1,7 +1,7 @@
 const Product = require("../../models/product.model.js");
 
 // [GET] /products
-module.exports.index = async (req, res) => {        // index là trang chính của controller products
+module.exports.index = async (req, res) => {        
 // hàm find, truyền vào object -> object là các bản ghi có key status: active và deleted: false 
   const products = await Product.find({            
     status: "active",
@@ -14,10 +14,28 @@ module.exports.index = async (req, res) => {        // index là trang chính c�
     return item;
   });
 
-  console.log(newProducts);
-
   res.render("client/pages/products/index.pug", {
     pageTitle: "Trang danh sách sản phẩm",
     products: newProducts
   });
-}
+};
+
+// [GET] /products/:slug
+module.exports.detail = async (req, res) => {
+  try {
+    const find = {
+      deleted: false,
+      slug: req.params.slug,
+      status: active
+    };
+
+    const product = await Product.findOne(find);
+    
+    res.render("client/pages/products/detail", {
+      pageTitle: product.title,
+      product: product
+    });
+  } catch (error) {
+    res.redirect(`/products`);
+  }
+};
