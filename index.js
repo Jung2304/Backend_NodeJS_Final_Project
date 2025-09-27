@@ -14,7 +14,7 @@ app.use(bodyParser.urlencoded({ extended: false }));     // parse application/fo
 
 //! lOCAL VARIABLES và STATIC FILES
 app.locals.prefixAdmin = systemConfig.prefixAdmin;
-app.use(express.static("public"));      // /public -> / -> các file tĩnh đều available từ root /
+app.use(express.static(`${__dirname}/public`));      // /public -> / -> các file tĩnh đều available từ root /
 
 //! DATABASE
 const database = require("./config/database.js");     // ./ start from current dir
@@ -43,7 +43,7 @@ routeAdmin(app);
 routeClient(app);      
 
 //! VIEW ENGINE
-app.set("views", "./views");
+app.set("views", `${__dirname}/views`);
 app.set("view engine", "pug");
 
 

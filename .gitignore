@@ -1,5 +1,7 @@
 # Node modules
-node_modules/
+/node_modules
+/.pnp
+.pnp.js
 
 # Logs
 npm-debug.log*
@@ -22,4 +24,4 @@ Thumbs.db
 /build
 
 # testing
-coverage
+/coverage
