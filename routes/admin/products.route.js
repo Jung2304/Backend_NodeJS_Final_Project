@@ -1,11 +1,11 @@
 const express = require("express");
 const multer = require("multer");
 const router = express.Router();
-const storageMulter = require("../../helpers/storageMulter.js");
-const upload = multer({ storage: storageMulter() });    
+const upload = multer();    
 
 const controller = require("../../controllers/admin/products.controller.js");
 const validate = require("../../validates/admin/product.validate.js");
+const uploadCloud = require("../../middlewares/admin/uploadCloud.middleware.js");
 
 // Trang products chính 
 router.get("/", controller.index);
@@ -22,8 +22,13 @@ router.delete("/delete/:id", controller.deleteItem);
 // Trang thêm mới sản phẩm (GET là để lấy ra trang giao diện tạo sản phẩm)
 router.get("/create", controller.create); 
 
-// Trang thêm mới sản phẩm 2 (POST là để gửi data về)
-router.post("/create", upload.single("thumbnail"), validate.createPost, controller.createPost);
+// Trang thêm mới sản phẩm (POST là để gửi data về)
+router.post(
+  "/create", 
+  upload.single("thumbnail"), 
+  uploadCloud.upload,
+  validate.createPost,  
+  controller.createPost);
 
 // Tính năng sửa sản phẩm (GET để lấy ra trang giao diện edit sản phẩm)
 router.get("/edit/:id", controller.edit);
