@@ -366,3 +366,101 @@ product-management-final/
 ├─ package.json
 ├─ README.md
 └─ tree.txt
+
+//ANCHOR - Seventh file tree (29/9/2025)
+
+product-management-final/
+├─ config/
+│  ├─ database.js
+│  └─ system.js
+├─ controllers/
+│  ├─ admin/
+│  │  ├─ dashboard.controller.js
+│  │  └─ products.controller.js
+│  └─ client/
+│     ├─ home.controller.js
+│     └─ products.controller.js
+├─ helpers/
+│  ├─ filterStatus.js
+│  ├─ pagination.js
+│  ├─ search.js
+│  └─ storageMulter.js
+├─ middlewares/
+│  ├─ admin/
+│  │  └─ uploadCloud.middleware.js
+│  └─ client/
+├─ models/
+│  └─ product.model.js
+├─ public/
+│  ├─ admin/
+│  │  ├─ css/
+│  │  │  └─ style.css
+│  │  ├─ images/
+│  │  └─ js/
+│  │     ├─ product.js
+│  │     └─ script.js
+│  ├─ client/
+│  │  ├─ css/
+│  │  │  └─ style.css
+│  │  ├─ images/
+│  │  │  └─ logo.svg
+│  │  └─ js/
+│  │     ├─ product.js
+│  │     └─ script.js
+│  └─ uploads/
+│     └─ 1758809826954-milk-cat-cat.png
+├─ routes/
+│  ├─ admin/
+│  │  ├─ dashboard.route.js
+│  │  ├─ index.route.js
+│  │  └─ products.route.js
+│  └─ client/
+│     ├─ home.route.js
+│     ├─ index.route.js
+│     └─ products.route.js
+├─ validates/
+│  └─ admin/
+│     └─ product.validate.js
+├─ views/
+│  ├─ admin/
+│  │  ├─ layouts/
+│  │  │  └─ default.pug
+│  │  ├─ mixins/
+│  │  │  ├─ alert.pug
+│  │  │  ├─ filter-status.pug
+│  │  │  ├─ form-change-multi.pug
+│  │  │  ├─ pagination.pug
+│  │  │  └─ search.pug
+│  │  ├─ pages/
+│  │  │  ├─ dashboard/
+│  │  │  │  └─ index.pug
+│  │  │  └─ products/
+│  │  │     ├─ create.pug
+│  │  │     ├─ detail.pug
+│  │  │     ├─ edit.pug
+│  │  │     └─ index.pug
+│  │  └─ partials/
+│  │     ├─ header.pug
+│  │     └─ sider.pug
+│  └─ client/
+│     ├─ layouts/
+│     │  └─ default.pug
+│     ├─ mixins/
+│     │  └─ box-head.pug
+│     ├─ pages/
+│     │  ├─ home/
+│     │  │  └─ index.pug
+│     │  └─ products/
+│     │     ├─ detail.pug
+│     │     └─ index.pug
+│     └─ partials/
+│        ├─ footer.pug
+│        └─ header.pug
+├─ .env
+├─ .gitignore
+├─ index.js
+├─ package-lock.json
+├─ package.json
+├─ README.md
+├─ tree.txt
+└─ vercel.json
