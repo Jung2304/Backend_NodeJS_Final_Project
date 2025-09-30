@@ -202,3 +202,42 @@ if (uploadImage) {
   });
 }
 //! End Upload image
+
+
+//! Sort
+const sort = document.querySelector("[sort]");
+if (sort) {
+  let url = new URL(window.location.href);
+  const sortSelections = document.querySelector("[sort-select]");
+  if (sortSelections) {
+    sortSelections.addEventListener("change", (event) => {
+      const selection = event.target.value;
+      const [sortKey, sortValue] = selection.split("-");
+
+      url.searchParams.set("sortKey", sortKey);
+      url.searchParams.set("sortValue", sortValue);
+
+      window.location.href = url.href;
+    });
+
+    const clearButton = document.querySelector("[sort-clear]");
+    if (clearButton) {
+      clearButton.addEventListener("click", () => {        
+        url.searchParams.delete("sortKey");
+        url.searchParams.delete("sortValue");  
+
+        window.location.href = url.href;      // assign it back
+      });
+    };
+  }
+
+  const sortKey = url.searchParams.get("sortKey");
+  const sortValue = url.searchParams.get("sortValue");
+  if (sortKey && sortValue) {
+    sortSelections.value = `${sortKey}-${sortValue}`;       
+  }
+}
+//! End Sort
+
+
+

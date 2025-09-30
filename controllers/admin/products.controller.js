@@ -8,10 +8,18 @@ const paginationHelper = require("../../helpers/pagination.js");
 
 //< [GET] /admin/products
 module.exports.index = async (req, res) => {
-  //< Biến find để tìm kiếm theo điều kiện
   let find = {
     deleted: false 
   };
+
+  //! Sort
+  let sort = {};
+
+  if (req.query.sortKey && req.query.sortValue) {
+    sort[req.query.sortKey] = req.query.sortValue;
+  } else {
+    sort.position = "desc";
+  }
 
   //! Bộ lọc trạng thái
   const filterStatus = filterStatusHelper(find, req.query);
@@ -28,7 +36,7 @@ module.exports.index = async (req, res) => {
   const objectPagination = paginationHelper(req.query, totalProducts);
   
   //! Phần dùng model + các logic để trích xuất dữ liệu
-  const products = await Product.find(find).limit(objectPagination.limitItems).skip(objectPagination.skip).sort({ position: "desc" });           
+  const products = await Product.find(find).limit(objectPagination.limitItems).skip(objectPagination.skip).sort(sort);           
 
   //! Phần truyền ra view
   res.render("admin/pages/products/index", {

@@ -30,11 +30,16 @@ router.post(
   validate.createPost,  
   controller.createPost);
 
-// Tính năng sửa sản phẩm (GET để lấy ra trang giao diện edit sản phẩm)
+// Tính năng chỉnh sửa sản phẩm (GET để lấy ra trang giao diện edit sản phẩm)
 router.get("/edit/:id", controller.edit);
 
-// Tính năng sửa sản phẩm (PATCH để cập nhật sản phẩm)
-router.patch("/edit/:id", upload.single("thumbnail"), validate.createPost, controller.editPatch);       // validate giống nhau -> dùng lại
+// Tính năng chỉnh sửa sản phẩm (PATCH để cập nhật sản phẩm)
+router.patch(
+  "/edit/:id", 
+  upload.single("thumbnail"), 
+  uploadCloud.upload,
+  validate.createPost, 
+  controller.editPatch);       // validate giống nhau -> dùng lại
 
 // Trang chi tiết sản phẩm
 router.get("/detail/:id", controller.detail);
