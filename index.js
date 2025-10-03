@@ -6,6 +6,7 @@ const bodyParser = require("body-parser");
 const flash = require("express-flash");
 const cookieParser = require("cookie-parser");
 const session = require("express-session");
+const path = require("path");
 
 //! APP
 const app = express(); 
@@ -35,6 +36,9 @@ app.use(session({
   cookie: { maxAge: 60000 } 
 }));
 app.use(flash());
+
+//! TinyMCE
+app.use('/tinymce', express.static(path.join(__dirname, 'node_modules', 'tinymce')));
 
 //! MAIN ROUTE
 const routeAdmin = require("./routes/admin/index.route.js");        // dashboard of Admin  

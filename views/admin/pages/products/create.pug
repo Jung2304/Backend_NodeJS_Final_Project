@@ -12,7 +12,10 @@ block main
       input(type="text" class="form-control" id="title" name="title" required)
     div(class="form-group")
       label(for="desc") Mô tả
-      textarea(class="form-control" id="desc" name="description" rows="5")
+      textarea(class="form-control textarea-mce" id="desc" name="description" rows="5")
+    div(class="form-group")
+      label(for="content") Nội dung
+      textarea(class="form-control textarea-mce" id="content" name="content" rows="5")
     div(class="form-group")
       label(for="price") Giá
       input(type="number" class="form-control" id="price" name="price" value="0" min="0" required) 
@@ -23,7 +26,7 @@ block main
       label(for="stock") Số lượng
       input(type="number" class="form-control" id="stock" name="stock" value="0" min="0")
     div(class="form-group" upload-image)
-      label(for="thumbnail") Ảnh 
+      label(for="thumbnail") Ảnh sản phẩm
       input(type="file" class="form-control-file" id="thumbnail" name="thumbnail" accept="image/*" upload-image-input)
 
       .upload-preview
