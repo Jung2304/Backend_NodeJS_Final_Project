@@ -8,31 +8,28 @@ cloudinary.config({
   api_secret: process.env.CLOUD_SECRET, 
 });
 
-module.exports.upload = (req, res, next) => {
-  if (req.file) {                     // Nếu có up file thì mới cho upload
-    let streamUpload = (req) => {
-    return new Promise((resolve, reject) => {
-      let stream = cloudinary.uploader.upload_stream((error, result) => {
-        if (result) {
-          resolve(result);
-        } else {
-          reject(error);
-        }
-      });
+module.exports.upload = async (req, res, next) => {
+  if (!req.file) return next();
 
+  const streamUpload = (req) => {
+    return new Promise((resolve, reject) => {
+      const stream = cloudinary.uploader.upload_stream(
+        { folder: "products" },
+        (error, result) => {
+          if (result) resolve(result);
+          else reject(error);
+        }
+      );
       streamifier.createReadStream(req.file.buffer).pipe(stream);
     });
   };
 
-    async function upload(req) {
-      let result = await streamUpload(req);
-      console.log(result);
-      req.body[req.file.fieldname] = result.url;
-      next();
-    }
-
-    upload(req);
-  } else {
+  try {
+    const result = await streamUpload(req);
+    req.body[req.file.fieldname] = result.secure_url;
     next();
+  } catch (err) {
+    console.error("❌ Cloudinary upload error:", err.message);
+    return res.status(500).send("Upload failed: " + err.message);
   }
-}
+};
