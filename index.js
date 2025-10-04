@@ -1,4 +1,5 @@
 require("dotenv").config();     // cài package dotenv và require như này để dùng các hằng trong file .env
+
 const express = require("express");
 const systemConfig = require("./config/system.js");     // cài các biến hệ thống thành biến toàn cục
 const methodOverride = require("method-override");
