@@ -1,8 +1,8 @@
 //! Button status
 const buttonsStatus = document.querySelectorAll("[button-status]");
 
-if(buttonsStatus.length > 0) {         // ktra nếu tồn tại thì mới thêm logic -> tối ưu 
-  let url = new URL(window.location.href);      // hàm URL cho phép ta phân tích URL vừa truyền vào
+if(buttonsStatus.length > 0) {         
+  let url = new URL(window.location.href);        // hàm URL cho phép ta phân tích URL vừa truyền vào
 
   buttonsStatus.forEach((button) => {
     button.addEventListener("click", () => {
@@ -28,7 +28,7 @@ if (formSearch) {
   let url = new URL(window.location.href);
 
   formSearch.addEventListener("submit", (event) => {
-    event.preventDefault();       // logic này để kết hợp tìm kiếm + trạng thái hoạt động
+    event.preventDefault();           // logic này để kết hợp tìm kiếm + trạng thái hoạt động
     const keyword = event.target.elements.keyword.value;
 
     if (keyword) {
@@ -37,6 +37,7 @@ if (formSearch) {
     else {
       url.searchParams.delete("keyword");     // nếu không tìm kiếm thì xóa đi
     }
+    url.searchParams.set("page", 1);
 
     window.location.href = url.href;
   });

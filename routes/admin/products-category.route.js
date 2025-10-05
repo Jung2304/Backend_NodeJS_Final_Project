@@ -10,6 +10,9 @@ const uploadCloud = require("../../middlewares/admin/uploadCloud.middleware.js")
 // Trang products-category chính 
 router.get("/", controller.index);
 
+// Tính năng thay đổi trạng thái (1 danh mục)
+router.patch("/change-status/:status/:id", controller.changeStatus);
+
 // Giao diện tạo danh mục [GET]
 router.get("/create", controller.create);
 
