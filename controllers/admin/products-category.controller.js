@@ -79,7 +79,46 @@ module.exports.changeStatus = async (req, res) => {
 
   await ProductCategory.updateOne({ _id: id }, { status: status });
 
-  req.flash("success", "Cập nhật trạng thái sản phẩm thành công!");
+  req.flash("success", "Cập nhật trạng thái danh mục thành công!");
+
+  res.redirect("back");
+};
+
+//< [PATCH] /admin/products-category/change-multi
+module.exports.changeMulti = async (req, res) => {
+  const type = req.body.type;
+  const ids = req.body.ids.split(", ");     // tách thành một mảng
+
+  //> Sau này sẽ có nhiều type nữa
+  switch (type) {
+    case "active":
+      await ProductCategory.updateMany({ _id: { $in: ids } }, { status: "active" });
+      req.flash("success", `Cập nhật trạng thái (Hoạt động) thành công cho ${ids.length} danh mục!`);
+      break;
+    case "inactive":
+      await ProductCategory.updateMany({ _id: { $in: ids } }, {status: "inactive"});
+      req.flash("success", `Cập nhật trạng thái (Dừng hoạt động) thành công cho ${ids.length} danh mục!`);
+      break;
+    case "delete-all":
+      await ProductCategory.updateMany({ _id: { $in: ids } }, {
+        deleted: true,
+        deletedAt: new Date()
+      });
+      req.flash("success", `Xóa thành công ${ids.length} danh mục!`);
+      break;
+    case "change-position":
+      for (const item of ids) {
+        let [id, position] = item.split("-");         // Destructuring
+        position = parseInt(position);               // Position là kiểu Number 
+        await ProductCategory.updateOne({ _id: id }, {
+          position: position 
+        });
+      }
+      req.flash("success", `Đổi vị trí thành công cho ${ids.length} danh mục!`);
+      break;
+    default:
+      break;
+  }
 
   res.redirect("back");
 };

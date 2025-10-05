@@ -4,7 +4,7 @@ include ../../mixins/search.pug
 include ../../mixins/pagination.pug
 include ../../mixins/form-change-multi.pug
 include ../../mixins/alert.pug
-include ../../mixins/sort.pug
+include ../../mixins/sort-productsCategory.pug
 
 block main  
   +alert-success(5000)
@@ -33,6 +33,7 @@ block main
     .card-body
       .row
         .col-10
+          +form-change-multi(`${prefixAdmin}/products-category/change-multi?_method=PATCH`)
         .col-2
           a(href=`${prefixAdmin}/products-category/create` class="btn btn-outline-success") + Thêm mới
 
@@ -77,5 +78,8 @@ block main
 
   //-! Changing status form
   form(action="" method="POST" id="form-change-status" data-path=`${prefixAdmin}/products-category/change-status`) 
+
+  //-! Delete item form
+  form(action="" method="POST" id="form-delete-item" data-path=`${prefixAdmin}/products-category/delete`) 
 
   script(src="/admin/js/product.js")

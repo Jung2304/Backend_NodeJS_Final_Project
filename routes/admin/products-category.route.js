@@ -13,6 +13,9 @@ router.get("/", controller.index);
 // Tính năng thay đổi trạng thái (1 danh mục)
 router.patch("/change-status/:status/:id", controller.changeStatus);
 
+// Tính năng thay đổi trạng thái (nhiều danh mục)
+router.patch("/change-multi/", controller.changeMulti);
+
 // Giao diện tạo danh mục [GET]
 router.get("/create", controller.create);
 

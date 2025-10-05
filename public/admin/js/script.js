@@ -85,7 +85,7 @@ if (checkboxMulti) {
 
   inputsID.forEach(button => {
     button.addEventListener("change", () => {
-      inputCheckAll.checked = inputsArray.every(button => button.checked);
+      inputCheckAll.checked = inputsArray.every(button => button.checked);        // if one box is change (checked/unchecked), then (checked/unchecked) the "Check All"
     });
   });
 }
@@ -109,7 +109,7 @@ if (formChangeMulti) {
     }
 
     if (selection == "delete-all") {
-      const isConfirm = confirm("Bạn có chắc chắn muốn xóa những sản phẩm này?");
+      const isConfirm = confirm("Bạn có chắc chắn muốn xóa những sản phẩm/danh mục này?");
       if (!isConfirm) {
         return;         // Nếu không confirm thì sẽ hủy toàn bộ thao tác đằng sau
       }
