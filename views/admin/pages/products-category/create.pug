@@ -1,5 +1,6 @@
 extends ../../layouts/default.pug
 include ../../mixins/alert.pug
+include ../../mixins/create-select-parent.pug
 
 block main  
   +alert-error(5000)
@@ -11,14 +12,16 @@ block main
       label(for="title") Tiêu đề
       input(type="text" class="form-control" id="title" name="title" required)
     div(class="form-group")
-      label(for="parent-id") Danh mục cha 
-      input(type="text" class="form-control" id="parent_id" name="parent_id")
+      label(for="parent-id")
+      select(name="parent-id" id="parent-id" class="form-control")
+        option(value="" disable selected) --Chọn danh mục cha--
+          +findParent(categories)
     div(class="form-group")
       label(for="desc") Mô tả
       textarea(class="form-control textarea-mce" id="desc" name="description" rows="5")
     div(class="form-group" upload-image)
       label(for="thumbnail") Ảnh
-      input(type="file" class="form-control-file" id="thumbnail" name="thumbnail" accept="image/*" upload-image-input required)
+      input(type="file" class="form-control-file" id="thumbnail" name="thumbnail" accept="image/*" upload-image-input)
       .upload-preview
         img(src="" upload-image-preview class="image-preview")
         button(type="button" id="delete-button") Xóa

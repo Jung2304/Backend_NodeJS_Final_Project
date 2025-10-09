@@ -5,12 +5,17 @@ const systemConfig = require("../../config/system.js");
 const filterStatusHelper = require("../../helpers/filterStatus.js");
 const searchHelper = require("../../helpers/search.js");
 const paginationHelper = require("../../helpers/pagination.js");
+const createTreeHelper = require("../../helpers/createTree.js");
 
 //< [GET] /admin/products-category
 module.exports.index = async (req, res) => {
   let find = {
     deleted: false,
   };
+
+  //! Tree
+  const categories = await ProductCategory.find(find);
+  const newCategories = createTreeHelper.createTree(categories);
 
   //! Sort
   let sort = {};
@@ -35,30 +40,32 @@ module.exports.index = async (req, res) => {
   const total = await ProductCategory.countDocuments({deleted: false});       // đếm tổng số sản phẩm chưa bị xóa
   const objectPagination = paginationHelper(req.query, total);
 
-  //! Phần dùng model + các logic để trích xuất dữ liệu
-  const productCategory = await ProductCategory.find(find).limit(objectPagination.limitItems).skip(objectPagination.skip).sort(sort); 
-
   res.render("admin/pages/products-category/index", {
     pageTitle: "Danh mục sản phẩm",
-    productCategory: productCategory,
+    productCategory: newCategories,
     filterStatus: filterStatus,
     keyword: objectSearch.keyword,              // giữ từ tìm kiếm ở ô input
-    pagination: objectPagination                // truyền luôn cả object ra ngoài
+    pagination: objectPagination,                // truyền luôn cả object ra ngoài
   });
 };
 
 //< [GET] /admin/products-category/create
 module.exports.create = async (req, res) => {
-  
+  let find = {                // tìm các danh mục hiện có
+    deleted: false
+  }
+
+  const categories = await ProductCategory.find(find);
+  const newCategories = createTreeHelper.createTree(categories);
+
   res.render("admin/pages/products-category/create", {
     pageTitle: "Tạo danh mục sản phẩm",
+    categories: newCategories
   });
 };
 
 //< [POST] /admin/products-category/create
 module.exports.createPost = async (req, res) => {
-  console.log(req.body);
-
   if (req.body.position == "") {
     const count = await ProductCategory.countDocuments();
     req.body.position = count + 1;
