@@ -1,0 +1,15 @@
+const express = require("express");
+const router = express.Router();
+
+const controller = require("../../controllers/admin/role.controller.js");
+
+// Trang danh sách chính
+router.get("/", controller.index);
+
+// Trang tạo role mới [GET]
+router.get("/create", controller.create);
+
+// Trang tạo role mới [POST]
+router.post("/create", controller.createPost);
+
+module.exports = router;

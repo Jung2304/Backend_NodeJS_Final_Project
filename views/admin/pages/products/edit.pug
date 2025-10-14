@@ -13,7 +13,7 @@ block main
       input(type="text" class="form-control" id="title" name="title" value=product.title required)
     div(class="form-group")
       label(for="desc") Mô tả
-      textarea(class="form-control" id="desc" name="description" rows="5") #{product.description}
+      textarea(class="form-control textarea-mce" id="desc" name="description" rows="5") #{product.description}
     div(class="form-group")
       label(for="price") Giá
       input(type="number" class="form-control" id="price" name="price" value=product.price min="0" required) 
