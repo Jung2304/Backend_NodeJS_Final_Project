@@ -12,4 +12,10 @@ router.get("/create", controller.create);
 // Trang tạo role mới [POST]
 router.post("/create", controller.createPost);
 
+// Trang chỉnh sửa [GET]
+router.get("/edit/:id", controller.edit);
+
+// Trang chỉnh sửa [PATCH]
+router.patch("/edit/:id", controller.editPatch);
+
 module.exports = router;
