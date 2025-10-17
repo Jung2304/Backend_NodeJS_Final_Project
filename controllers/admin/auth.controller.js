@@ -5,9 +5,13 @@ const systemConfig = require("../../config/system.js");
 
 // [GET] /admin/auth/login 
 module.exports.login = (req, res) => {
-  res.render("admin/pages/auth/login.pug", {
-    pageTitle: "Trang đăng nhập"
-  }); 
+  if (req.cookies.token) {        // nếu đã có token rồi thì không cần đăng nhập nữa
+    res.redirect(`${systemConfig.prefixAdmin}/dashboard`);
+  } else {
+      res.render("admin/pages/auth/login.pug", {
+      pageTitle: "Trang đăng nhập"
+    }); 
+  }
 };
 
 // [POST] /admin/auth/loginPost
@@ -38,7 +42,7 @@ module.exports.loginPost = async (req, res) => {
     return;
   }
 
-  res.cookie("token", user.token);
+  res.cookie("token", user.token);        // res.cookie(name, value)
   res.redirect(`${systemConfig.prefixAdmin}/dashboard`);      // nếu thành công thì về trang tổng quan
 };
 
