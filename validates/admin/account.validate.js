@@ -1,4 +1,4 @@
-//! Validate tiêu đề khi tạo sản phẩm mới 
+//! Validate khi admin tạo tài khoản mới 
 module.exports.createPost = (req, res, next) => {
   if (!req.body.fullName) {
     req.flash("error", "Vui lòng nhập họ và tên!");
