@@ -12,5 +12,7 @@ router.post(
   validate.loginPost,
   controller.loginPost);
 
+// Trang đăng xuất [GET]
+router.get("/logout", controller.logout);
 
 module.exports = router;
