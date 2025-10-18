@@ -8,6 +8,7 @@ const flash = require("express-flash");
 const cookieParser = require("cookie-parser");
 const session = require("express-session");
 const path = require("path");
+const moment = require("moment");
 
 //! APP
 const app = express(); 
@@ -16,6 +17,8 @@ app.use(bodyParser.urlencoded({ extended: false }));     // parse application/fo
 
 //! lOCAL VARIABLES và STATIC FILES
 app.locals.prefixAdmin = systemConfig.prefixAdmin;
+app.locals.moment = moment;
+
 app.use(express.static(`${__dirname}/public`));      // /public -> / -> các file tĩnh đều available từ root /
 
 //! DATABASE

@@ -1,4 +1,5 @@
 const Product = require("../../models/product.model.js");
+const Account = require("../../models/account.model.js");
 const systemConfig = require("../../config/system.js");
 
 //! Helpers
@@ -35,8 +36,20 @@ module.exports.index = async (req, res) => {
   const totalProducts = await Product.countDocuments({deleted: false});       // đếm tổng số sản phẩm chưa bị xóa
   const objectPagination = paginationHelper(req.query, totalProducts);
   
-  //! Phần dùng model + các logic để trích xuất dữ liệu
+  //! Phần dùng model + các logic để trích xuất ds sản phẩm
   const products = await Product.find(find).limit(objectPagination.limitItems).skip(objectPagination.skip).sort(sort);           
+
+  //! Phần lấy ra tên user đã tạo sản phẩm (model Account)
+  for (const product of products) {
+    const user = await Account.findOne({
+      _id: product.createdBy.account_id,
+    });
+
+    if (user) {
+      product.accountFullName = user.fullName;
+    }
+  }
+
 
   //! Phần truyền ra view
   res.render("admin/pages/products/index", {
@@ -139,11 +152,15 @@ module.exports.createPost = async (req, res) => {
     req.body.position = parseInt(req.body.position);
   }
   
+  req.body.createdBy = {
+    account_id: res.locals.user.id,
+  };
+
   const product = new Product(req.body);      
   await product.save();
 
   res.redirect(`${systemConfig.prefixAdmin}/products`);
-}
+};
 
 //< [GET] /admin/products/edit/:id
 module.exports.edit = async (req, res) => {
