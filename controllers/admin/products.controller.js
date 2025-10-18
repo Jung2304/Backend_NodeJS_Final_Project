@@ -41,12 +41,23 @@ module.exports.index = async (req, res) => {
 
   //! Phần lấy ra tên user đã tạo sản phẩm (model Account)
   for (const product of products) {
-    const user = await Account.findOne({
+    //> Thông tin người tạo
+    const creator = await Account.findOne({
       _id: product.createdBy.account_id,
     });
 
-    if (user) {
-      product.accountFullName = user.fullName;
+    if (creator) {
+      product.accountFullName = creator.fullName;
+    }
+
+    //> Thông tin người cập nhật gần nhất
+    const recentUpdater = product.updatedBy[product.updatedBy.length - 1];      // ptu cuối
+    if (recentUpdater) {
+      const user = await Account.findOne({
+        _id: recentUpdater.account_id,
+      });
+
+      recentUpdater.accountFullName = user.fullName;
     }
   }
 
@@ -201,7 +212,15 @@ module.exports.editPatch = async (req, res) => {
   }
   
   try {
-    await Product.updateOne({ _id: req.params.id }, req.body);
+    const updatedBy = {
+      account_id: res.locals.user.id,
+      updatedAt: new Date()
+    }
+
+    await Product.updateOne({ _id: req.params.id }, {
+      $set: {...req.body},
+      $push: { updatedBy: updatedBy }
+    });
     req.flash("success", "Cập nhật thành công!");
   }
   catch (error) {
